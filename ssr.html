@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>ssr四合院脚本搭建</title>
+</head>
+<body>
+	<h1>Shadowsocks 一键安装脚本（四合一）</h1>
+	<h2>本脚本适用环境</h2>
+    <p>系统支持：CentOS 6+，Debian 7+，Ubuntu 12+</p>
+	<p>内存要求：≥128M </p>
+	<h2>关于脚本</h2>
+	<p>1、一键安装 Shadowsocks-Python， ShadowsocksR， Shadowsocks-Go， Shadowsocks-libev 版（四选一）服务端；</p>
+	<p>2、各版本的启动脚本及配置文件名不再重合；</p>
+	<p>3、每次运行可安装一种版本；</p>
+	<p>4、支持以多次运行来安装多个版本，且各个版本可以共存（注意端口号需设成不同）；</p>
+	<p>5、若已安装多个版本，则卸载时也需多次运行（每次卸载一种）；</p>
+使用方法
+	使用root用户登录，运行以下命令：
+  <p><span style="font-size:14px;">1、一键安装 Shadowsocks-Python， ShadowsocksR， Shadowsocks-Go， Shadowsocks-libev 版（四选一）服务端；</span><br>
+<span style="font-size:14px;">2、各版本的启动脚本及配置文件名不再重合；</span><br>
+<span style="font-size:14px;">3、每次运行可安装一种版本；</span><br>
+<span style="font-size:14px;">4、支持以多次运行来安装多个版本，且各个版本可以共存（注意端口号需设成不同）；</span><br>
+<span style="font-size:14px;">5、若已安装多个版本，则卸载时也需多次运行（每次卸载一种）；</span></p>
+<p><span style="font-size:14px;"><span style="color:red;"><strong>友情提示：</strong></span>如果你有问题，请先阅读这篇《<a href="https://teddysun.com/399.html" target="_blank">Shadowsocks Troubleshooting</a>》之后再询问。</span></p>
+<p>
+	<span id="more-486"></span>
+</p>
+<p></p>
+<h3>
+	<span style="color:red;">默认配置</span><br>
+</h3>
+<p><span style="font-size:14px;">服务器端口：自己设定（如不设定，默认从 9000-19999 之间随机生成）</span><br>
+<span style="font-size:14px;">密码：自己设定（如不设定，默认为 teddysun.com）</span><br>
+<span style="font-size:14px;">加密方式：自己设定（如不设定，Python 和 libev 版默认为 aes-256-gcm，R 和 Go 版默认为 aes-256-cfb）</span><br>
+<span style="font-size:14px;">协议（protocol）：自己设定（如不设定，默认为 origin）（仅限 ShadowsocksR 版）</span><br>
+<span style="font-size:14px;">混淆（obfs）：自己设定（如不设定，默认为 plain）（仅限 ShadowsocksR 版）</span><br>
+<span style="font-size:14px;"><strong>备注：</strong>脚本默认创建单用户配置文件，如需配置多用户，请手动修改相应的配置文件后重启即可。</span></p>
+<h3>
+	<span style="color:red;">客户端下载</span><br>
+</h3>
+<p><span style="font-size:14px;">常规版 Windows 客户端</span><br>
+<span style="font-size:14px;"><a target="_blank" href="https://github.com/shadowsocks/shadowsocks-windows/releases">https://github.com/shadowsocks/shadowsocks-windows/releases</a></span></p>
+<p><span style="font-size:14px;">ShadowsocksR 版 Windows 客户端</span><br>
+<span style="font-size:14px;"><a target="_blank" href="https://github.com/shadowsocksrr/shadowsocksr-csharp/releases">https://github.com/shadowsocksrr/shadowsocksr-csharp/releases</a></span></p>
+<h3>
+	<span style="color:red;">使用方法</span><br>
+</h3>
+<p><span style="font-size:14px;">使用root用户登录，运行以下命令：</span></p>
+<pre class="prettyprint lang-bsh">wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh
+chmod +x shadowsocks-all.sh
+./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</pre>
+<p></p>
+<h3>
+	<span style="color:red;">安装完成后，脚本提示如下</span><br>
+</h3>
+<pre class="prettyprint lang-bsh">Congratulations, your_shadowsocks_version install completed!
+Your Server IP        :your_server_ip
+Your Server Port      :your_server_port
+Your Password         :your_password
+Your Encryption Method:your_encryption_method
+
+Your QR Code: (For Shadowsocks Windows, OSX, Android and iOS clients)
+ ss://your_encryption_method:your_password@your_server_ip:your_server_port
+Your QR Code has been saved as a PNG file path:
+ your_path.png
+
+Welcome to visit:https://teddysun.com/486.html
+Enjoy it!</pre>
+<p></p>
+<h3>
+	<span style="color:red;">卸载方法</span><br>
+</h3>
+<p><span style="font-size:14px;">若已安装多个版本，则卸载时也需多次运行（每次卸载一种）</span></p>
+<p><span style="font-size:14px;">使用root用户登录，运行以下命令：</span></p>
+<pre class="prettyprint lang-bsh">./shadowsocks-all.sh uninstall</pre>
+<p></p>
+<h3>
+	<span style="color:red;">启动脚本</span><br>
+</h3>
+<p><span style="font-size:14px;">启动脚本后面的参数含义，从左至右依次为：启动，停止，重启，查看状态。</span></p>
+<p><span style="font-size:14px;">Shadowsocks-Python 版：</span><br>
+<span style="font-size:14px;">/etc/init.d/shadowsocks-python start | stop | restart | status</span></p>
+<p><span style="font-size:14px;">ShadowsocksR 版：</span><br>
+<span style="font-size:14px;">/etc/init.d/shadowsocks-r start | stop | restart | status</span></p>
+<p><span style="font-size:14px;">Shadowsocks-Go 版：</span><br>
+<span style="font-size:14px;">/etc/init.d/shadowsocks-go start | stop | restart | status</span></p>
+<p><span style="font-size:14px;">Shadowsocks-libev 版：</span><br>
+<span style="font-size:14px;">/etc/init.d/shadowsocks-libev start | stop | restart | status</span></p>
+<h3>
+	<span style="color:red;">各版本默认配置文件</span><br>
+</h3>
+<p><span style="font-size:14px;">Shadowsocks-Python 版：</span><br>
+<span style="font-size:14px;">/etc/shadowsocks-python/config.json</span></p>
+<p><span style="font-size:14px;">ShadowsocksR 版：</span><br>
+<span style="font-size:14px;">/etc/shadowsocks-r/config.json</span></p>
+<p><span style="font-size:14px;">Shadowsocks-Go 版：</span><br>
+<span style="font-size:14px;">/etc/shadowsocks-go/config.json</span></p>
+<p><span style="font-size:14px;">Shadowsocks-libev 版：</span><br>
+<span style="font-size:14px;">/etc/shadowsocks-libev/config.json</span></p>
+<h3>
+</body>
+</html>
